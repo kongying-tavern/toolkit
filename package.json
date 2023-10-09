@@ -1,20 +1,43 @@
 {
-  "name": "yolo-api",
-  "version": "1.0.0",
+  "name": "kongying-toolkit",
+  "version": "0.0.0",
+  "private": true,
   "description": "",
-  "main": "index.js",
+  "main": "dist-electron/main.js",
   "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build && electron-builder",
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
     "commit": "cz",
     "release": "semantic-release"
   },
   "keywords": [],
   "author": "",
-  "license": "GPL-3.0-only",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
   "devDependencies": {
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7",
+    "@typescript-eslint/eslint-plugin": "^6.6.0",
+    "@typescript-eslint/parser": "^6.6.0",
+    "@vitejs/plugin-react": "^4.0.4",
     "commitizen": "^4.3.0",
     "cz-emoji": "1.3.2-canary.2",
+    "electron": "^26.1.0",
+    "electron-builder": "^24.6.4",
+    "eslint": "^8.48.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
     "semantic-release": "^21.0.7",
-    "semantic-release-gitmoji": "^1.6.4"
+    "semantic-release-gitmoji": "^1.6.4",
+    "typescript": "^5.2.2",
+    "vite": "^4.4.11",
+    "vite-plugin-electron": "^0.14.0",
+    "vite-plugin-electron-renderer": "^0.14.5"
   },
   "config": {
     "commitizen": {
