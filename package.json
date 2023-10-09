@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build && electron-builder",
-    "lint": "eslint ./src --ext ts,tsx,js,cjs",
+    "lint": "eslint ./src ./electron --ext ts,tsx,js,cjs",
     "preview": "vite preview",
     "commit": "cz",
     "release": "semantic-release"
