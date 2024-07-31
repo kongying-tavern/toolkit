@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import { useMemo } from "react";
 import {
   FluentProvider,
   webDarkTheme,
@@ -6,33 +6,14 @@ import {
   Switch,
 } from "@fluentui/react-components";
 import styles from "./App.module.css";
+import { useDark } from "./hooks";
 
 export const App = () => {
-  const [dark, setDark] = useState(
-    window.matchMedia("(prefers-color-scheme: dark)").matches,
-  );
-
-  const onChange = useCallback(
-    (ev: React.ChangeEvent<HTMLInputElement>) => {
-      setDark(ev.currentTarget.checked);
-    },
-    [setDark],
-  );
+  const [dark, { onChange }] = useDark();
 
   const theme = useMemo(() => {
     return dark ? webDarkTheme : webLightTheme;
   }, [dark]);
-
-  useEffect(() => {
-    const handleColorSchemaChange = (ev: MediaQueryListEvent) => {
-      setDark(ev.matches);
-    };
-    const query = window.matchMedia("(prefers-color-scheme: dark)");
-    query.addEventListener("change", handleColorSchemaChange);
-    return () => {
-      query.removeEventListener("change", handleColorSchemaChange);
-    };
-  }, []);
 
   return (
     <FluentProvider theme={theme} className={styles.fluentProvider}>
