@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback } from "react";
+import type { ChangeEvent } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 const query = window.matchMedia("(prefers-color-scheme: dark)");
 
@@ -6,7 +7,7 @@ export const useDark = () => {
   const [dark, setDark] = useState(query.matches);
 
   const onChange = useCallback(
-    (ev: React.ChangeEvent<HTMLInputElement>) => {
+    (ev: ChangeEvent<HTMLInputElement>) => {
       setDark(ev.currentTarget.checked);
     },
     [setDark],
@@ -24,5 +25,9 @@ export const useDark = () => {
     };
   }, []);
 
-  return [dark, { setDark, onChange }] as const;
+  return {
+    dark,
+    setDark,
+    onChange,
+  };
 };

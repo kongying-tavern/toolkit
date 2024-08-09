@@ -9,7 +9,7 @@ import styles from "./App.module.css";
 import { useDark } from "./hooks";
 
 export const App = () => {
-  const [dark, { onChange }] = useDark();
+  const { dark, onChange } = useDark();
 
   const theme = useMemo(() => {
     return dark ? webDarkTheme : webLightTheme;
