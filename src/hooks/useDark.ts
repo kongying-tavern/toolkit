@@ -1,33 +1,17 @@
-import type { ChangeEvent } from "react";
-import { useState, useEffect, useCallback } from "react";
-
-const query = window.matchMedia("(prefers-color-scheme: dark)");
+import { useMemo, useCallback } from "react";
+import { usePreferenceStore } from "@/stores";
 
 export const useDark = () => {
-  const [dark, setDark] = useState(query.matches);
+  const { themeSchema } = usePreferenceStore();
 
-  const onChange = useCallback(
-    (ev: ChangeEvent<HTMLInputElement>) => {
-      setDark(ev.currentTarget.checked);
-    },
-    [setDark],
-  );
+  const isDark = useMemo(() => themeSchema === "dark", [themeSchema]);
 
-  useEffect(() => {
-    const handleColorSchemaChange = (ev: MediaQueryListEvent) => {
-      setDark(ev.matches);
-    };
-
-    query.addEventListener("change", handleColorSchemaChange);
-
-    return () => {
-      query.removeEventListener("change", handleColorSchemaChange);
-    };
+  const setDark = useCallback((dark: boolean) => {
+    usePreferenceStore.setState({ themeSchema: dark ? "dark" : "light" });
   }, []);
 
   return {
-    dark,
+    isDark,
     setDark,
-    onChange,
   };
 };
