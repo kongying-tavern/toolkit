@@ -16,8 +16,12 @@ declare namespace NodeJS {
      * ```
      */
     DIST: string;
+
     /** /dist/ or /public/ */
     VITE_PUBLIC: string;
+
+    /** @dev 仅限开发模式 */
+    VITE_DEV_SERVER_URL?: string;
   }
 }
 

@@ -1,11 +1,8 @@
 import { app, BrowserWindow } from "electron";
 import path from "node:path";
 import { createWindow } from "./createWindow";
-
-export interface AppContext {
-  instance?: BrowserWindow;
-  VITE_DEV_SERVER_URL?: string;
-}
+import configMenus from "./plugins/configMenus";
+import configDevTools from "./plugins/configDevTools";
 
 // The built directory structure
 //
@@ -21,14 +18,16 @@ process.env.VITE_PUBLIC = app.isPackaged
   ? process.env.DIST
   : path.join(process.env.DIST, "../public");
 
-const context: AppContext = {
-  VITE_DEV_SERVER_URL: process.env["VITE_DEV_SERVER_URL"],
+const context: ElectronApp.Context = {
+  isDev: !app.isPackaged,
 };
 
-void (async (context: AppContext) => {
+void (async (context: ElectronApp.Context) => {
   await app.whenReady();
 
-  createWindow(context);
+  const plugins: ElectronApp.Plugin[] = [configMenus, configDevTools];
+
+  createWindow(context, plugins);
 
   app.on("window-all-closed", () => {
     if (process.platform === "darwin") return;
@@ -37,6 +36,6 @@ void (async (context: AppContext) => {
 
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length > 0) return;
-    createWindow(context);
+    createWindow(context, plugins);
   });
 })(context);
