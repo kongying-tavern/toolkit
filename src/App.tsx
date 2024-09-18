@@ -5,19 +5,28 @@ import {
   webLightTheme,
   Switch,
 } from "@fluentui/react-components";
-import styles from "./App.module.css";
 import { useDark } from "./hooks";
 
 export const App = () => {
-  const { dark, onChange } = useDark();
+  const { isDark, setDark } = useDark();
 
   const theme = useMemo(() => {
-    return dark ? webDarkTheme : webLightTheme;
-  }, [dark]);
+    return isDark ? webDarkTheme : webLightTheme;
+  }, [isDark]);
 
   return (
-    <FluentProvider theme={theme} className={styles.fluentProvider}>
-      <Switch label="黑暗模式" checked={dark} onChange={onChange}></Switch>
+    <FluentProvider
+      className="
+        absolute top-0 left-0 w-full h-full overflow-hidden
+        transition-[all] duration-[var(--durationNormal)] ease-[var(--durationNormal)]
+      "
+      theme={theme}
+    >
+      <Switch
+        label="黑暗模式"
+        checked={isDark}
+        onChange={(ev) => setDark(ev.currentTarget.checked)}
+      />
     </FluentProvider>
   );
 };
