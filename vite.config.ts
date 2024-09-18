@@ -22,4 +22,13 @@ export default defineConfig({
       renderer: {},
     }),
   ],
+
+  resolve: {
+    alias: [
+      {
+        find: /^@\//,
+        replacement: `${path.resolve(__dirname, "src")}/`,
+      },
+    ],
+  },
 });
