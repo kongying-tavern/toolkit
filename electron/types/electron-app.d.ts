@@ -1,10 +1,15 @@
+/// <reference types="electron/electron" />
+
 declare namespace ElectronApp {
   interface Context {
     isDev: boolean;
-    instance?: BrowserWindow;
+    instance?: Electron.BrowserWindow;
   }
 
   interface Plugin {
-    afterCreated?: (win: BrowserWindow, ctx: Context) => void;
+    afterCreated?: (
+      win: Electron.BrowserWindow,
+      ctx: ElectronApp.Context,
+    ) => void;
   }
 }
