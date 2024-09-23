@@ -17,6 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "@fluentui/react-components": "^9.54.6",
+    "ahooks": "^3.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "zustand": "^4.5.4"
