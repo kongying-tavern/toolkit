@@ -40,22 +40,6 @@ const config: Config = {
       80: "320px",
       96: "384px",
     },
-    extend: {
-      flex: {
-        2: "2 2 0%",
-        3: "3 3 0%",
-        4: "4 4 0%",
-        5: "5 5 0%",
-        6: "6 6 0%",
-        7: "7 7 0%",
-        8: "8 8 0%",
-        9: "9 9 0%",
-      },
-      backgroundImage: {
-        alpha:
-          "conic-gradient(from -0.25turn, var(--el-fill-color-darker) 25%, transparent 25%, transparent 50%, var(--el-fill-color-darker) 50%, var(--el-fill-color-darker) 75%, transparent 75%)",
-      },
-    },
   },
   plugins: [],
 };
