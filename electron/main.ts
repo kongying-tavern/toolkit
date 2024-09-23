@@ -20,6 +20,7 @@ process.env.VITE_PUBLIC = app.isPackaged
 
 const context: ElectronApp.Context = {
   isDev: !app.isPackaged,
+  instance: undefined,
 };
 
 void (async (context: ElectronApp.Context) => {
@@ -30,6 +31,7 @@ void (async (context: ElectronApp.Context) => {
   createWindow(context, plugins);
 
   app.on("window-all-closed", () => {
+    context.instance = undefined;
     if (process.platform === "darwin") return;
     app.quit();
   });

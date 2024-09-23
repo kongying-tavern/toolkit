@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, session } from "electron";
 import path from "node:path";
 
 export const createWindow = (
@@ -21,9 +21,13 @@ export const createWindow = (
   }
 
   const win = new BrowserWindow({
-    height: 1000,
+    minWidth: 600 + 16,
+    minHeight: 400 + 39,
+    width: 600 + 16,
+    height: 400 + 39,
     icon: path.join(process.env.VITE_PUBLIC, "logo.png"),
     webPreferences: {
+      nodeIntegration: true,
       devTools: !app.isPackaged,
       preload: path.join(__dirname, "preload.js"),
     },
@@ -39,5 +43,16 @@ export const createWindow = (
 
   context.instance = win;
 
-  return;
+  session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+    callback({
+      responseHeaders: {
+        ...details.responseHeaders,
+        // 设置 CSP 策略消除 Electron 安全警告
+        "Content-Security-Policy": ["default-src 'self' 'unsafe-inline'"],
+        // 设置 COOP 和 COEP 来启用 SharedArrayBuffers
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp",
+      },
+    });
+  });
 };

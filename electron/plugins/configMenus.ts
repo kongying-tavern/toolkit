@@ -1,6 +1,8 @@
+import { Menu } from "electron";
+
 const plugin: ElectronApp.Plugin = {
-  afterCreated: (win) => {
-    win.setMenuBarVisibility(false);
+  afterCreated: () => {
+    Menu.setApplicationMenu(null);
   },
 };
 
