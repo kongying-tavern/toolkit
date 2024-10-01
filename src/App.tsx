@@ -7,8 +7,9 @@ import {
 } from "@fluentui/react-components";
 import { useDark } from "./hooks";
 import * as Layout from "@/layout";
+import { Tooltip } from "@fluentui/react-components";
 
-export const App = () => {
+const App = () => {
   const { isDark, setDark } = useDark();
 
   const theme = useMemo(() => {
@@ -17,6 +18,7 @@ export const App = () => {
 
   return (
     <FluentProvider
+      applyStylesToPortals={false}
       className="
         absolute top-0 left-0 w-full h-full overflow-hidden
         grid grid-rows-[auto_1fr] grid-cols-[auto_1fr]
@@ -42,8 +44,12 @@ export const App = () => {
           transition-[background-color] duration-[var(--durationNormal)] ease-[var(--durationNormal)]
         "
       >
-        内容
+        <Tooltip content="test" relationship="label">
+          <div>Main Content</div>
+        </Tooltip>
       </div>
     </FluentProvider>
   );
 };
+
+export default App;
