@@ -48,7 +48,7 @@ export const createWindow = (
       responseHeaders: {
         ...details.responseHeaders,
         // 设置 CSP 策略消除 Electron 安全警告
-        "Content-Security-Policy": ["default-src 'self' 'unsafe-inline'"],
+        "Content-Security-Policy": "default-src 'self' 'unsafe-inline' blob:",
         // 设置 COOP 和 COEP 来启用 SharedArrayBuffers
         "Cross-Origin-Opener-Policy": "same-origin",
         "Cross-Origin-Embedder-Policy": "require-corp",
